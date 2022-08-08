@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_seccion_1"
+            android:icon="@drawable/iconmenu"
+            android:visible="false"
+            android:title="Home"/>
+        <item
+            android:id="@+id/menu_seccion_2"
+            android:icon="@drawable/iconmenu"
+            android:visible="false"
+            android:title="Deberes"/>
+        <item
+            android:id="@+id/menu_seccion_3"
+            android:icon="@drawable/iconmenu"
+            android:visible="false"
+            android:title="Solicitudes"/>
+    </group>
+</menu>
+
