@@ -104,6 +104,7 @@ class MainActivity : AppCompatActivity() {
 
     fun getTypeUser(idTypeUser: String): Type? {
 
+        //Aquí se debería hacer el pedido a la api, pero como no tengo, uso un json en un string :v
         val jsonTypes =
             "[{\"name\":\"Estudiante\",\"id\":\"1\",\"options\":[\"PENDIENTES\",\"AULA VIRTUAL\",\"FICHA MÉDICA\",\"HOJA DE VIDA\"]},{\"name\":\"Profesor\",\"id\":\"2\",\"options\":[\"AULA VIRTUAL\",\"FICHA MÉDICA\",\"MALLA\",\"HOJA DE VIDA\"]},{\"name\":\"Coordinador\",\"id\":\"3\",\"options\":[\"ALUMNOS\",\"MAESTROS\",\"AULA VIRTUAL\",\"FICHA MÉDICA\",\"MALLA\",\"HOJA DE VIDA\"]}]"
 

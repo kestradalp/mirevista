@@ -6,11 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/navheader" />
+
+    <TextView
+        android:id="@+id/lblTipoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="25dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"/>
 
     <TextView
         android:id="@+id/lblNombreUser"
@@ -27,6 +38,7 @@
         android:layout_width="70dp"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
         android:layout_marginBottom="50dp"
         android:src="@drawable/user"
         app:civ_border_color="#FF000000"
