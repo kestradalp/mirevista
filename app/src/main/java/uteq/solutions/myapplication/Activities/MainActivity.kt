@@ -1,9 +1,13 @@
 package uteq.solutions.myapplication.Activities
 
 
+import Alumnos
+import Maestros
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.HeaderViewListAdapter
 import android.widget.TextView
 import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -24,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var user: User
+    var type: Type? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,48 +37,39 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Activar el botón del menú
-        val toggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.open_drawer, R.string.close_drawer)
+        val toggle: ActionBarDrawerToggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            binding.toolbar,
+            R.string.open_drawer,
+            R.string.close_drawer
+        )
         binding.drawerLayout.addDrawerListener(toggle)
 
         //Tomar el objeto usuario que me pasa el login
         user = intent.getParcelableExtra<User>("user") as User
 
         //Cargo los datos del usuario en el menú
+
+        var header: View? = binding.navView.getHeaderView(0)
+
         Picasso.get().load(user.avatar).into(
-            binding.navView.getHeaderView(0).findViewById<CircleImageView>(R.id.profile_image)
+            header?.findViewById<CircleImageView>(R.id.profile_image)
         )
-        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.lblNombreUser).text = user.name
+        header?.findViewById<TextView>(R.id.lblNombreUser)?.text = user.name
+
+        type = getTypeUser(user.type.toString())
+        header?.findViewById<TextView>(R.id.lblTipoUsuario)?.text = type?.name
         addOptions()
 
     }
 
     private fun addOptions() {
 
-        lateinit var type: Type
-
-        val idTypeUser:String = user.type.toString()
-
-
-        val jsonTypes =
-            "[{\"name\":\"student tipe 1\",\"id\":\"1\",\"options\":[\"PENDIENTES\",\"AULA VIRTUAL\",\"FICHA MÉDICA\",\"HOJA DE VIDA\"]},{\"name\":\"teacher\",\"id\":\"1\",\"options\":[\"AULA VIRTUAL\",\"FICHA MÉDICA\",\"MALLA\",\"HOJA DE VIDA\"]},{\"name\":\"coordinator\",\"id\":\"1\",\"options\":[\"ALUMNOS\",\"PROFESORES\",\"AULA VIRTUAL\",\"FICHA MÉDICA\",\"MALLA\",\"HOJA DE VIDA\"]}]"
-
-        val typeArray = Type.jsonObjectsBuild(JSONArray(jsonTypes))
-
-        for (i in 0 until typeArray.size) {
-            if (idTypeUser == typeArray[i].id) {
-                type =  typeArray[i]
-            }
-        }
-
-
-
-
         for (i in 0 until type!!.options!!.size) {
             var option = type!!.options!![i].toString()
 
-            var menu: Menu = binding.navView.menu
-
-            menu.add(option).setIcon(R.drawable.iconmenu)
+            binding.navView.menu.add(option).setIcon(R.drawable.iconmenu)
                 .setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener { //do what u want
                     when (it.title) {
                         "PENDIENTES" -> {
@@ -91,6 +87,12 @@ class MainActivity : AppCompatActivity() {
                         "HOJA DE VIDA" -> {
                             setFragment(HojaDeVida())
                         }
+                        "MAESTROS" -> {
+                            setFragment(Maestros())
+                        }
+                        "ALUMNOS" -> {
+                            setFragment(Alumnos())
+                        }
                     }
                     binding.toolbar.title = it.title
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
@@ -100,15 +102,15 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun getTypeUser(type: String): Type? {
-        //Aquí se debería hacer el pedido a la api; pero, como no tengo, uso un json en un string :v
+    fun getTypeUser(idTypeUser: String): Type? {
+
         val jsonTypes =
-            "[{\"1\":[\"PENDIENTES\",\"AULA VIRTUAL\",\"FICHA MÉDICA\",\"MALLA\",\"HOJA DE VIDA\"]},{\"2\":[\"FICHA MÉDICA\",\"HOJA DE VIDA\"]},{\"2\":[\"FICHA MÉDICA\",\"MALLA\",\"HOJA DE VIDA\"]}]"
+            "[{\"name\":\"Estudiante\",\"id\":\"1\",\"options\":[\"PENDIENTES\",\"AULA VIRTUAL\",\"FICHA MÉDICA\",\"HOJA DE VIDA\"]},{\"name\":\"Profesor\",\"id\":\"2\",\"options\":[\"AULA VIRTUAL\",\"FICHA MÉDICA\",\"MALLA\",\"HOJA DE VIDA\"]},{\"name\":\"Coordinador\",\"id\":\"3\",\"options\":[\"ALUMNOS\",\"MAESTROS\",\"AULA VIRTUAL\",\"FICHA MÉDICA\",\"MALLA\",\"HOJA DE VIDA\"]}]"
 
         val typeArray = Type.jsonObjectsBuild(JSONArray(jsonTypes))
 
         for (i in 0 until typeArray.size) {
-            if (type == typeArray[i].name) {
+            if (idTypeUser == typeArray[i].id) {
                 return typeArray[i]
             }
         }

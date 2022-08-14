@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
     fun consAPI(user1: String, pass1: String): User? {
         //Aquí se debería hacer el pedido a la api, pero como no tengo uso un json en un string :v
         val jsonUsers =
-            "[{\"nickname\":\"kelvin\",\"pass\":\"12345\",\"name\":\"Kelvin Estrada\",\"avatar\":\"https://i.postimg.cc/FHq4t78B/Kelvin.png\",\"type\":\"1\"},{\"nickname\":\"Nigma\",\"pass\":\"nigmamen\",\"name\":\"Veas\",\"avatar\":\"https://i.postimg.cc/j2dChSXg/Veas.jpg\",\"type\":\"2\"},{\"nickname\":\"galves\",\"pass\":\"123456789\",\"name\":\"Eduardo Galves\",\"avatar\":\"https://i.postimg.cc/HnJBjdyK/Galves.jpg\",\"type\":\"3\"}]"
+            "[{\"nickname\":\"kelvin\",\"pass\":\"12345\",\"name\":\"Kelvin Estrada\",\"avatar\":\"https://i.postimg.cc/FHq4t78B/Kelvin.png\",\"type\":\"1\"},{\"nickname\":\"Nigma\",\"pass\":\"nigmamen\",\"name\":\"Veas\",\"avatar\":\"https://i.postimg.cc/j2dChSXg/Veas.jpg\",\"type\":\"3\"},{\"nickname\":\"galves\",\"pass\":\"123456789\",\"name\":\"Eduardo Galves\",\"avatar\":\"https://i.postimg.cc/HnJBjdyK/Galves.jpg\",\"type\":\"2\"}]"
 
         val userArray = User.jsonObjectsBuild(JSONArray(jsonUsers))
 
