@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".Activities.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="1dp"
         android:orientation="vertical">
 
@@ -18,11 +18,14 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="#008733"
             android:elevation="4dp"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:navigationIcon="@drawable/iconmenu"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@color/white"
+            app:title="SÚPER APP QUE HACE ALGO" />
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -34,8 +37,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/cabecera"
-        app:menu="@menu/menu" />
+        app:headerLayout="@layout/cabecera" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
 
